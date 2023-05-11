@@ -11,6 +11,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState();
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -28,12 +29,17 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setSelectedCard();
+  }
+
+  function handleCardClick(card) {
+    setSelectedCard(card)
   }
 
   return (
     <div className="page">
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
+      <Main onCardClick={handleCardClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
       <Footer />
       <PopupWithForm name="edit-profile" title="Редактировать профиль" buttonText="Сохранить" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <fieldset className="popup__info">
@@ -99,20 +105,7 @@ function App() {
       </fieldset>
       </PopupWithForm>
       <PopupWithForm name="delete-card" title="Вы уверены?" buttonText="Да" onClose={closeAllPopups} />
-      <ImagePopup onClose={closeAllPopups} />
-      <template id="card-template">
-        <article className="card">
-          <img className="card__image" src="#" alt="#" />
-          <button type="button" className="card__recycle-bin" aria-label="Удалить карточку"></button>
-          <div className="card__caption">
-            <h2 className="card__title"></h2>
-            <div className="card__like-counter">
-              <button type="button" className="card__like" aria-label="Нравится"></button>
-              <p className="card__counter"></p>
-            </div>
-          </div>
-        </article>
-      </template>
+      <ImagePopup onClose={closeAllPopups} card={selectedCard} />
     </div>
   );
 }

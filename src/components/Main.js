@@ -1,6 +1,7 @@
 import React from 'react';
 import pencil from '../images/pencil.svg';
 import { api } from '../utils/api';
+import Card from './Card';
 
 function Main(props) {
 
@@ -24,7 +25,6 @@ function Main(props) {
   React.useEffect(() => {
     api.getInitialCards()
       .then(res => {
-        console.log(res)
         setCards(res);
       })
       .catch(err => {
@@ -50,17 +50,7 @@ function Main(props) {
       </section>
       <section className="cards">
         {cards.map((card) => (
-          <article className="card" key={card._id}>
-            <img className="card__image" src={card.link} alt="#" />
-            <button type="button" className="card__recycle-bin" aria-label="Удалить карточку"></button>
-            <div className="card__caption">
-              <h2 className="card__title">{card.name}</h2>
-              <div className="card__like-counter">
-                <button type="button" className="card__like" aria-label="Нравится"></button>
-                <p className="card__counter">{card.likes.length > 0 ? `${card.likes.length}` : ''}</p>
-              </div>
-            </div>
-          </article>
+          <Card card={card} key={card._id} onCardClick={props.onCardClick} />
         ))}
       </section>
     </main>
