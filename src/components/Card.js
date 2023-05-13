@@ -5,7 +5,7 @@ function Card(props) {
 
   return (
     <article className="card">
-      <img className="card__image" src={props.card.link} alt="#" onClick={handleClick} />
+      <img className="card__image" src={props.card.link} alt={props.card.name} onClick={handleClick} />
       <button type="button" className="card__recycle-bin" aria-label="Удалить карточку"></button>
       <div className="card__caption">
         <h2 className="card__title">{props.card.name}</h2>
