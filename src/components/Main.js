@@ -30,7 +30,6 @@ function Main(props) {
       })
   }, []);
 
-
   return (
     <main className="content">
       <section className="profile">

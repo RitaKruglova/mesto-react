@@ -29,7 +29,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard();
+    setSelectedCard(null);
   }
 
   function handleCardClick(card) {
