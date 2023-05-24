@@ -1,17 +1,25 @@
-function Card(props) {
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useContext} from 'react';
+
+function Card({ card, onCardClick }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const isOwn = card.owner._id === currentUser._id;
+  const isLiked = card.likes.some(like => like._id === currentUser._id);
+
   function handleClick() {
-    props.onCardClick(props.card);
+    onCardClick(card);
   }
 
   return (
     <article className="card">
-      <img className="card__image" src={props.card.link} alt={props.card.name} onClick={handleClick} />
-      <button type="button" className="card__recycle-bin" aria-label="Удалить карточку"></button>
+      <img className="card__image" src={card.link} alt={card.name} onClick={handleClick} />
+      {isOwn && <button type="button" className="card__recycle-bin" aria-label="Удалить карточку"></button>}
       <div className="card__caption">
-        <h2 className="card__title">{props.card.name}</h2>
+        <h2 className="card__title">{card.name}</h2>
         <div className="card__like-counter">
-          <button type="button" className="card__like" aria-label="Нравится"></button>
-          <p className="card__counter">{props.card.likes.length > 0 ? `${props.card.likes.length}` : ''}</p>
+          <button type="button" className={`card__like${isLiked && ' card__like_active'}`} aria-label="Нравится"></button>
+          <p className="card__counter">{card.likes.length > 0 ? `${card.likes.length}` : ''}</p>
         </div>
       </div>
     </article>
