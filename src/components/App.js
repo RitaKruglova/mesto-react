@@ -4,6 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import EditProfilePopup from './EditProfilePopup';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import '../App.css';
@@ -14,7 +15,11 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({
+    name: 'Юно Гасай',
+    about: 'Школьница',
+    avatar: 'https://i.pinimg.com/564x/e6/6e/33/e66e33b1565337384ffa0e75ab1a78fc.jpg'
+  });
 
 
 
@@ -57,32 +62,7 @@ function App() {
         <Header />
         <Main onCardClick={handleCardClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
         <Footer />
-        <PopupWithForm name="edit-profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-          <fieldset className="popup__info">
-            <input
-              id="profileNameInput"
-              type="text"
-              name="fullname"
-              className="popup__input popup__input_type_username"
-              placeholder="Введите имя"
-              required
-              minLength="2"
-              maxLength="40"
-            />
-            <span id="inputNameError" className="popup__error popup__error_visible"></span>
-            <input
-              id="profileDescriptionInput"
-              type="text"
-              name="about"
-              className="popup__input popup__input_type_about-user"
-              placeholder="Введите род деятельности"
-              required
-              minLength="2"
-              maxLength="200"
-            />
-            <span id="inputAboutUserError" className="popup__error popup__error_visible"></span>
-          </fieldset>
-        </PopupWithForm>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
         <PopupWithForm name="add-card" title="Новое место" buttonText="Создать" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} >
         <fieldset className="popup__info">
           <input
