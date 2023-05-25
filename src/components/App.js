@@ -16,6 +16,8 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
 
+
+
   useEffect(() => {
     api.getUserInfo()
       .then(res => {
