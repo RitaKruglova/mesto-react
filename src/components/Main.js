@@ -7,6 +7,47 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function Main(props) {
   const currentUser = useContext(CurrentUserContext);
 
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    api.getInitialCards()
+      .then(res => {
+        setCards(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, []);
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(like => like._id === currentUser._id);
+
+    api.changeLikeCardStatus(card._id, isLiked)
+      .then(newCard => {
+        let index;
+        cards.forEach((c, i) => {
+          if (c._id === card._id) {
+            index = i;
+          }
+        })
+        cards[index] = newCard;
+        setCards([...cards])
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        setCards(cards.filter(c => card._id !== c._id));
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   return (
     <main className="content">
       <section className="profile">
@@ -24,8 +65,8 @@ function Main(props) {
         <button type="button" className="profile__add-button" aria-label="Добавить" onClick={props.onAddPlace} />
       </section>
       <section className="cards">
-        {props.cards.map((card) => (
-          <Card onCardDelete={props.onCardDelete} onCardLike={props.onCardLike} card={card} key={card._id} onCardClick={props.onCardClick} />
+        {cards.map((card) => (
+          <Card onCardDelete={handleCardDelete} onCardLike={handleCardLike} card={card} key={card._id} onCardClick={props.onCardClick} />
         ))}
       </section>
     </main>
