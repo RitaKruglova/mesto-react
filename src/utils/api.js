@@ -46,11 +46,11 @@ class Api {
     return this._fetch(`/users/me`);
   }
 
-  setUserInfo({ fullname, about }) {
+  setUserInfo({ name, about }) {
     return this._fetch(`/users/me`, 'PATCH',
       JSON.stringify({
-        name: fullname,
-        about: about
+        name,
+        about
       })
     );
   }
