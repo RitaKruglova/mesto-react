@@ -1,17 +1,13 @@
 import PopupWithForm from "./PopupWithForm";
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const nameRef = useRef();
-
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [nameError, setNameError] = useState('');
-  const [descriptionError, setDescriptionError] = useState('');
 
   useEffect(() => {
     setName(currentUser.name);
@@ -51,10 +47,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           maxLength="40"
           onChange={handleNameChange}
           value={name}
-          ref={nameRef}
-          novalidate
         />
-        <span id="inputNameError" className="popup__error popup__error_visible">{nameError}</span>
+        <span id="inputNameError" className="popup__error popup__error_visible"></span>
         <input
           id="profileDescriptionInput"
           type="text"
