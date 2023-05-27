@@ -13,6 +13,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     });
 
     onClose();
+    
     formRef.current.reset();
   }
 

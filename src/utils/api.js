@@ -55,11 +55,11 @@ class Api {
     );
   }
 
-  addNewCard(inputValues) {
+  addNewCard({ name, link }) {
     return this._fetch(`/cards`, 'POST',
       JSON.stringify({
-        name: inputValues.name,
-        link: inputValues.link
+        name,
+        link
       })
     )
   }
