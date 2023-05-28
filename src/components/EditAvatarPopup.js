@@ -10,11 +10,11 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
     onUpdateAvatar({
       avatar: inputAvatarRef.current.value
-    });
-
-    onClose();
-    
-    formRef.current.reset();
+    })
+      .then(() => {
+        onClose();
+        formRef.current.reset();
+      })
   }
 
   return (
