@@ -18,9 +18,9 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({
-    name: 'Юно Гасай',
-    about: 'Школьница',
-    avatar: 'https://i.pinimg.com/564x/e6/6e/33/e66e33b1565337384ffa0e75ab1a78fc.jpg'
+    name: '',
+    about: '',
+    avatar: ''
   });
   const [cards, setCards] = useState([]);
   
@@ -76,6 +76,9 @@ function App() {
           about: res.about,
         })
       })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   function handleUpdateAvatar({ avatar }) {
@@ -85,6 +88,9 @@ function App() {
           ...currentUser,
           avatar: res.avatar
         })
+      })
+      .catch(err => {
+        console.log(err);
       })
   }
 
@@ -121,6 +127,9 @@ function App() {
     return api.addNewCard({name, link })
       .then(newCard => {
         return setCards([newCard, ...cards]);
+      })
+      .catch(err => {
+        console.log(err);
       })
   }
 
