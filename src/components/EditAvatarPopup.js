@@ -17,8 +17,13 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       })
   }
 
+  function handleClose() {
+    onClose();
+    inputAvatarRef.current.value = '';
+  }
+
   return (
-    <PopupWithForm formRef={formRef} onSubmit={handleSubmit} name="avatar" title="Обновить аватар" isOpen={isOpen} onClose={onClose} >
+    <PopupWithForm formRef={formRef} onSubmit={handleSubmit} name="avatar" title="Обновить аватар" isOpen={isOpen} onClose={handleClose} >
       <fieldset className="popup__info">
         <input
           id="input-link-avatar"
