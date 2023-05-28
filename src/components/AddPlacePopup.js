@@ -28,8 +28,14 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       })
   }
 
+  function handleClose() {
+    onClose();
+    setName('');
+    setLink('');
+  }
+
   return (
-    <PopupWithForm onSubmit={handleSubmit} name="add-card" title="Новое место" buttonText="Создать" isOpen={isOpen} onClose={onClose} >
+    <PopupWithForm onSubmit={handleSubmit} name="add-card" title="Новое место" buttonText="Создать" isOpen={isOpen} onClose={handleClose} >
       <fieldset className="popup__info">
         <input
           id="input-picture-name"
