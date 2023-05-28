@@ -20,12 +20,12 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     onAddPlace({
       name,
       link
-    });
-
-    onClose();
-
-    setName('');
-    setLink('');
+    })
+      .then(() => {
+        onClose();
+        setName('');
+        setLink('');
+      })
   }
 
   return (

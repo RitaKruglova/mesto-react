@@ -68,9 +68,9 @@ function App() {
   }
 
   function handleUpdateUser({ name, about }) {
-    api.setUserInfo({ name, about })
+    return api.setUserInfo({ name, about })
       .then(res => {
-        setCurrentUser({
+        return setCurrentUser({
           ...currentUser,
           name: res.name,
           about: res.about,
@@ -79,9 +79,9 @@ function App() {
   }
 
   function handleUpdateAvatar({ avatar }) {
-    api.changeAvatar(avatar)
+    return api.changeAvatar(avatar)
       .then(res => {
-        setCurrentUser({
+        return setCurrentUser({
           ...currentUser,
           avatar: res.avatar
         })
@@ -118,9 +118,9 @@ function App() {
   }
 
   function handleAddPlaceSubmit({ name, link }) {
-    api.addNewCard({name, link })
+    return api.addNewCard({name, link })
       .then(newCard => {
-        setCards([newCard, ...cards]);
+        return setCards([newCard, ...cards]);
       })
   }
 

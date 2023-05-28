@@ -28,9 +28,10 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     onUpdateUser({
       name,
       about: description,
-    });
-
-    onClose();
+    })
+      .then(() => {
+        onClose();
+      })
   }
 
   return (
