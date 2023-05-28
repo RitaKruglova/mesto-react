@@ -1,6 +1,5 @@
-import {useEffect, useState, useContext} from 'react';
+import { useContext} from 'react';
 import pencil from '../images/pencil.svg';
-import { api } from '../utils/api';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
