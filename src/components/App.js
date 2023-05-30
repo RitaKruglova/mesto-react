@@ -76,6 +76,9 @@ function App() {
           about: res.about,
         })
       })
+      .then(() => {
+        closeAllPopups();
+      })
       .catch(err => {
         console.log(err);
       })
@@ -88,6 +91,9 @@ function App() {
           ...currentUser,
           avatar: res.avatar
         })
+      })
+      .then(() => {
+        closeAllPopups();
       })
       .catch(err => {
         console.log(err);
@@ -127,6 +133,9 @@ function App() {
     return api.addNewCard({name, link })
       .then(newCard => {
         return setCards([newCard, ...cards]);
+      })
+      .then(() => {
+        closeAllPopups();
       })
       .catch(err => {
         console.log(err);
