@@ -1,9 +1,13 @@
 import PopupWithForm from "./PopupWithForm";
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   const inputAvatarRef = useRef();
   const formRef = useRef();
+
+  useEffect(() => {
+    inputAvatarRef.current.value = '';
+  }, [isOpen]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -17,13 +21,8 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       })
   }
 
-  function handleClose() {
-    onClose();
-    inputAvatarRef.current.value = '';
-  }
-
   return (
-    <PopupWithForm formRef={formRef} onSubmit={handleSubmit} name="avatar" title="Обновить аватар" isOpen={isOpen} onClose={handleClose} >
+    <PopupWithForm formRef={formRef} onSubmit={handleSubmit} name="avatar" title="Обновить аватар" isOpen={isOpen} onClose={onClose} >
       <fieldset className="popup__info">
         <input
           id="input-link-avatar"
