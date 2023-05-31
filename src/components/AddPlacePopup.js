@@ -25,10 +25,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       name,
       link
     })
-      .then(() => {
-        setName('');
-        setLink('');
-      })
   }
 
   return (
